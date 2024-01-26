@@ -1,0 +1,72 @@
+1) rm 
+2) 0.42.0
+
+3) 15612
+Ans :
+select count(*) from yellow_taxi_data 
+where date_part('day',lpep_pickup_datetime) = 18 and date_part('day',lpep_dropoff_datetime) = 18
+
+4) 2019-09-26
+Ans : select lpep_pickup_datetime,lpep_dropoff_datetime,max(lpep_dropoff_datetime - lpep_pickup_datetime) from yellow_taxi_data
+group by lpep_pickup_datetime,lpep_dropoff_datetime
+order by max(lpep_dropoff_datetime - lpep_pickup_datetime) desc limit 1;
+
+5) "Brooklyn" "Manhattan" "Queens"
+Ans : select "Borough",ceil(sum(total_amount)) from yellow_taxi_data as yt
+		 join taxi_zone as tz on "PULocationID" = "LocationID" and "Borough" <> 'Unknown'
+	where date_part('day',lpep_pickup_datetime)=18 group by "Borough" having ceil(sum(total_amount)) > 50000
+
+6) JFK Airport
+Ans : select tz2."Zone",max(tip_amount) from yellow_taxi_data as yt
+		 join taxi_zone as tz on "PULocationID" = tz."LocationID" AND "Zone" = 'Astoria'
+		 join taxi_zone as tz2 on "DOLocationID" = tz2."LocationID"
+		 group by tz2."Zone" order by max(tip_amount) desc limit 1; 
+
+7)
+google_bigquery_dataset.demo_dataset: Refreshing state... [id=projects/datatalks-de-409612/datasets/demo_dataset]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # google_storage_bucket.demo-bucket will be created
+  + resource "google_storage_bucket" "demo-bucket" {
+      + effective_labels            = (known after apply)
+      + force_destroy               = true
+      + id                          = (known after apply)
+      + location                    = "US"
+      + name                        = "datatalks-de-409612-terra-bucket"
+      + project                     = (known after apply)
+      + public_access_prevention    = (known after apply)
+      + self_link                   = (known after apply)
+      + storage_class               = "STANDARD"
+      + terraform_labels            = (known after apply)
+      + uniform_bucket_level_access = (known after apply)
+      + url                         = (known after apply)
+
+      + lifecycle_rule {
+          + action {
+              + type = "AbortIncompleteMultipartUpload"
+            }
+          + condition {
+              + age                   = 1
+              + matches_prefix        = []
+              + matches_storage_class = []
+              + matches_suffix        = []
+              + with_state            = (known after apply)
+            }
+        }
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+google_storage_bucket.demo-bucket: Creating...
+google_storage_bucket.demo-bucket: Creation complete after 2s [id=datatalks-de-409612-terra-bucket]
+
