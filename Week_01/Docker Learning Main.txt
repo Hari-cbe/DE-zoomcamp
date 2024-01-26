@@ -1,0 +1,59 @@
+VM Ware (Infra)-> Hypervisor -> multiple OS 
+
+docker ( base Infra ) -> OS ( ours ) -> container Engine (Like vehicle engine, Env) -> Bins/Lib 
+
+
+DOCKER -> 
+- Platform independent 
+- Image -> ISO file 
+	-> Image running on docker engine is called as Container.
+	-> read permission only 
+	-> One image can run multiple container 
+	-> Can change port
+	-> Isolation -> cannot change the image, only read permission 
+
+- Container 
+	-> We can change the cointainer 
+	-> can spin up the container that has been changed
+- only root user 
+
+- Docker File 
+
+- Docker volumes
+	-> mounting of data locally 
+	-> -v <NAME>:<PATHDATA>	
+	-> blind volume/mount    
+	-> only reference 
+
+- Docker Networks
+	-> Security reasons 
+	-> bridge network 
+	-> host netwoek
+	-> customer network
+
+- Docker-compose 
+	-> yml file 
+	-> starting multiple images at once 
+
+
+commands :
+
+docker login -> docker hub login id, password
+docker tag <OLDNAME> <NEWTAG> -> change the name of the tag 2 
+docker pull <> -> pull custom docker
+docker run -it -> interactive 
+docker run -d -> background running
+docker run -d -p 80:80 -> changing ports 
+docker build . -t <NAME> -> create a image 
+docker exec -t <C_ID> <bash/sh> -> execute the container 
+docker volumne ls -> lists the volume
+docker volume rm <NAME> -> remove volume 
+docker start <C_ID> -> Start the container 
+docker stop <C_ID> <C_ID>(Can support multiple Ids)-> stops the container
+docker ps -> dockers running process 
+docker ps -a -> docker running process all 
+docker rmi <ID> -> removes the image
+docker rm <ID> <ID> -> removes the container
+docker system prune -> deletes all 
+docker hub -> open source community
+docker inspect <NAME> -> inspect deeply

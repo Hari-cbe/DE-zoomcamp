@@ -1,0 +1,155 @@
+Pre req -> Python , Beging comfortable with command line, SQL
+
+NA req -> Previous experience with data engineering 
+
+Office hours -> Live sessions on Monday 
+Certificate - for passing the passing 
+Leaderboard -> Scores for homework, Project, Learning in Public -> look SS 
+
+WEEK -> 1 :
+
+DOCKER : 
+Why care about ?
+	- Reproducibility 
+	- Local experiments 
+	- Integration tests ( CI / CD )
+	- Running pipleins on cloud 
+	- Spark
+	- Severless ( AWS lambda, Google functions ) 
+Isolation -> If we do any stupid things in the image, It will not affect the original image 
+
+Commands -> 
+	docker run -it python:3.9 
+		-> After : is called as attack, It specifies the specific version
+	docker run -it --entrypoint=bash python:3.9
+		-> This will have a entry point as bash, where we install the packages
+! The installation will not occur in the orginal file
+So we need to edit the Dockerfile 
+	docker build -t <ImageNAME>:<Name> . 
+		-> . is used for current location
+	docker kill <ContainerName> 
+		-> Kill the container
+Dockerfile : 
+Every docker file starts with 
+
+FROM python:3.9
+
+RUN pip install pandas
+
+ENTRYPOINT ["bash"] / ENTRYPOINT ["python","<FileName>"]
+
+Created a pipeline.py file and made some work to do
+
+-- Docker Postgress Connection ---
+docker run -it \
+ -e POSTGRES_USER="root" \
+ -e POSTGRES_PASSWORD="root" \ 
+ -e POSTGRES_DB="ny_taxi" \ 
+ -v /home/haris/zoomcamp-learn/docker/ny_taxi_data/:/var/lib/postgresql/data \
+ -p 5432:5432 \
+ postgres:13
+
+docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root"  -e POSTGRES_DB="ny_taxi" -v /home/haris/zoomcamp-learn/docker/ny_taxi_data:/var/lib/postgresql/data -p 5432:5432 postgres:13
+
+uploading data to postgres:
+	pd.io.sql.get_schema(<df>, name="<>)
+		-> Get the schema infomation
+	pd.to_datetime(df.<columnName>)
+		-> changing the column to date time 
+SQLAlchemy -> connection between pd and plsql
+from sqlalchemy import create_engine 
+	engine =create_engine("postgresql://root:root@localhost:5432/ny_taxi")
+
+LEARN CHMOD,CHOWN --!
+
+sudo chown -R haris:haris ny_taxi_data/
+sudo chmod -R  755 ny_taxi_data/
+
+If we need to load large files we can use iterator and chuchsize
+pd.read_csv(<FILE>,iterator=True,chucksize=<SIZE>)
+
+
+PG ADMIN docker container :
+docker run -it -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" -e PGADMIN_DEFAULT_PASSWORD="root" -p 8080:80 --network=<NameOfthePostgresNetwork>  --name pgadmin dpage/pgadmin4
+
+Docker Networks :
+docker network create <NAME>
+
+docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root"  -e POSTGRES_DB="ny_taxi" -v /home/haris/zoomcamp-learn/docker/ny_taxi_data:/var/lib/postgresql/data -p 5432:5432  --network=<NAMEoftheNetwork> --name pg_database postgres:13
+
+jupyter nbconvert --to=script --> Convert the notebook to script.
+
+python -m http.server
+
+
+Steps we have done :
+1) converted the notebook to script
+2) cleaned the script
+3) made some changes to the script
+4) local run by python cli 
+5) dockerize it 
+6) run the docker
+
+
+docker run -it -e POSTGRES_USER="root" -e POSTGRES_PASSWORD="root"  -e POSTGRES_DB="ny_taxi" -v /home/haris/zoomcamp-learn/docker/ny_taxi_data:/var/lib/postgresql/data -p 5432:5432 --network=pg-admin-network --name=pg_database-2 postgres:13 
+
+
+docker run -it -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" -e PGADMIN_DEFAULT_PASSWORD="root" -p 8080:80 --network=pg-admin-network --name=pg_admin dpage/pgadmin4
+
+Volume Mapping
+
+YAML file :
+docker compose :
+docker-compose up
+docker-compose down 
+docker-compose up -d
+
+
+============================================================================================================================================================================================
+
+TERRAFORM :
+
+	-> infrastructure of code 
+		-> make resources of code file 
+	-> simplicity in keeping track of infra 
+	-> easier collaboration 
+	-> Reproducibility 
+	-> Ensure resources are removed
+
+HOW ->
+	Local Machine ( Terraform ) <---Provider---> Cloud 
+
+Providers -> Code to communicate between local to cloud 
+
+Variables.tf -> declaring variable and using it in main.tf
+
+Variable example :
+variable "VariableName"{
+description = ""
+default = ""
+}
+
+unset <Credentials> -> remove the credentials file 
+
+key terraform commands :
+
+init -> get me the provider I need 
+Plan -> what am I about to do ?
+Apply -> Do what is in the tf files 
+Destroy -> Remove everything defind in the tf files
+terraform fmt -> format the code 
+
+Service Account -> like normal account but never ment to be logged into ( * no loggin's )
+	{ Access => Storage Admin, BigQuery Admin, Compute Admin }
+
+
+
+What have Done in Tf :
+- Created a Sevice Account in gcp 
+- Exported the Google gloud crendentials to local machine 
+- Created a main.tf file and add the service providers to it 
+- Created a google gloud bucket and add the service
+- Added a git ignore so the keys will not be pushed to the git.
+- Created a variable file and mapped to the main.tf
+
+ 
