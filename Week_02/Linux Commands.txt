@@ -1,0 +1,22 @@
+LINUX Commands for learning purpose 
+
+unzip <FILENAME> -> unzips 
+gunzip <FILENAME> -> gz file format 
+mkdir <FOLDERNAME> -> create folder 
+rm <ANY> -> removes 
+touch <FILENAME> -> create a file
+cat <FILENAME> -> Reads a file 
+nano .bashrc -> edit the sys source file
+source bashrc -> save the sys source file 
+wget <LINK> -> downloads the link 
+sudo apt-get update -> updates the system
+sudo apt-get install <PROGRAM> -> installs the program 
+less <FILENAME> -> open the text file 
+head -n <NUMBER> <FILENAME> -> like pandas head 
+> -> copies the file to the specific file after the symbol 
+wc -> word count 
+we -l <FILENAME>-> word count for line
+history -> display last 50 commands 
+sudo bash -> root user 
+echo "" > file -> adds the command to the file 
+#!/bin/bash -> use bash script 

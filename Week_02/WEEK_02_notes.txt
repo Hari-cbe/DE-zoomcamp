@@ -1,0 +1,88 @@
+WEEK_02
+=> Orchestration Magical with mage 
+
+What we build ?
+Yellow_taxi_data -> transform -> gcp bg bucket 
+
+What is orchestration ?
+- Every workflow requires seq steps 
+- Automation 
+- Where steps are called works and workflows are called dags
+
+Mage :
+--- Projects -> piplines -> blocks ( ETL ) --- 
+
+
+Config Mage !
+
+git pull mage repo
+cp dev.env .env
+docker-compose build 
+docker pull mageai/mageai:latest
+docker compose up
+localhost:6789
+
+Config Postgres !
+
+create a dev profile and interpolate with ginga env_var('')
+create a pipeline with dataloader and test the connection 
+
+API -> PG DB
+Pipe line 
+Created a etl to get data from the csv, transform it and load the data to the mage postgres
+
+Pandas can handle gzip file :
+( Compression="gzip" ) -> While reading csv
+(parse_dates=<listName>) -> will pass as a datetime
+(dtypes=<>) -> datatypes in the file 
+
+Config GCS !
+
+create bucket  -> cloud storage fs to access
+service account 
+config in_config.yaml
+connect to gcs 
+
+ETL : API -> GCS
+
+partioning parquet 
+pyarrow package 
+
+os.environ['NAME'] = <Path>
+
+parameterized Execution 
+
+kwargs.get('execution_date') -> Getting the execution date of the pipeline
+
+Deployment prerequisites !
+
+Terraform, Gcloud cli, gcloud permission
+
+Deploying to gcloud permissions:
+Service Account :
+
+Artifact Registry Reader
+Artifact Registry Writer
+Cloud Run Developer
+Cloud SQL Admin 
+Service Account Token Creator
+
+Deployment 
+
+What we have done so far...
+
+1) Learnt what is orchestration
+2) What mage is 
+3) configured mage
+4) configured postgress
+5) Built a simple pipline to connect api and postgress ( dev config )
+6) built a pipline to connect api to gcs 
+7) partitioned the parquet file based on the date column
+8) Load from Bucket -> GoogleBigQuery 
+9) Deployement 
+
+
+
+
+
+
