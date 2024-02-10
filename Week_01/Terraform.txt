@@ -1,0 +1,44 @@
+TERRAFORM :
+
+	-> infrastructure of code 
+		-> make resources of code file 
+	-> simplicity in keeping track of infra 
+	-> easier collaboration 
+	-> Reproducibility 
+	-> Ensure resources are removed
+
+HOW ->
+	Local Machine ( Terraform ) <---Provider---> Cloud 
+
+Providers -> Code to communicate between local to cloud 
+
+Variables.tf -> declaring variable and using it in main.tf
+
+Variable example :
+variable "VariableName"{
+description = ""
+default = ""
+}
+
+unset <Credentials> -> remove the credentials file 
+
+key terraform commands :
+
+init -> get me the provider I need 
+Plan -> what am I about to do ?
+Apply -> Do what is in the tf files 
+Destroy -> Remove everything defind in the tf files
+terraform fmt -> format the code 
+
+Service Account -> like normal account but never ment to be logged into ( * no loggin's )
+	{ Access => Storage Admin, BigQuery Admin, Compute Admin }
+
+
+
+What have Done in Tf :
+- Created a Sevice Account in gcp 
+- Exported the Google gloud crendentials to local machine 
+- Created a main.tf file and add the service providers to it 
+- Created a google gloud bucket and add the service
+- Added a git ignore so the keys will not be pushed to the git.
+- Created a variable file and mapped to the main.tf
