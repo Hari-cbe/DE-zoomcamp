@@ -1,0 +1,70 @@
+Data Warehouse 
+
+OLAP VS OLTP
+
+What is Data Warehouse ?
+-> OLAP solution 
+-> Used for reporting and data analysis
+
+Data source -> Staging area -> Data Warehouse -> Data Marts -> End User
+
+
+Big Query?
+-> Data warehouse
+-> Serverless 
+	: There are no servers to manage or database software to install
+-> Infra with scalability and high avaliability
+
+Cost ->
+ : On Demand Pricing
+    1 TB -> $5
+ : Flat rate pricing 
+	Based on number of pre-req slots 
+	
+Partition in Big Query ->
+ : Partition in Big Query is very good
+ : Reduce the cost
+ : Time-unit Column
+ : 4000 - limit 
+ 
+Clustering ->
+ : Grouping 
+ : Improve cost and query performace
+ : Order of column is important 
+ : Improve fliter, Aggregate queries 
+ : Table < 1GB, don't show significant improve
+ : max 4 columns 
+ 
+Partition vs Clustering :
+ : Partition is cost unfront 
+ : you need partition-level management 
+ : If your data has high ammount of graulality clustering is used 
+
+Automatic reClustering :
+ : The newly inserted data can be written to blocks that contain key rangers that overlap with the already exists one
+ : This overlaping keys weaken the sort property of the table 
+ : To Maintain this 
+	: BigQuery performs automatic reClustering
+ 
+Big Query-Best Pratice
+ : Cost Reduction
+	: Avoid Select * 
+	: Price your queries before running them
+	: Use clusted or partition tables
+	: Use streaming inserts with caution
+	: Materialized query results in stages - CTE's 
+ : Query Performace 
+	: Filter on partitioned columns 
+	: Denormalizing data 
+	: use nested or repeated columns 
+	: reduce data before join 
+	: optimize your join patterns 
+	: As a best pratice, place the largest tables first and descreasing order by size 
+
+Internals -> 
+ : Data is stored in colossus 
+ : Jupiter network to communicate b/w the compute and colossus 
+ : Dremel -> Query Engine 
+ : BQ uses column-oritented 
+ : The distribution of work in Dermal is the reason why BQ is fast
+ 
