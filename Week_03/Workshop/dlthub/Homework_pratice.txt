@@ -1,0 +1,60 @@
+--------------------Question 1,2 ----------------
+def square_root_generator(limit):
+    n = 1
+    while n <= limit:
+        yield n ** 0.5
+        n += 1
+
+# Example usage:
+limit = 14
+generator = square_root_generator(limit)
+
+for index,sqrt_value in enumerate(generator):
+    print(f'{index} of {sqrt_value}')
+result = sum(list(generator))
+print(result)
+
+
+
+---------------------Question 3,4 ----------------
+import dlt 
+import duckdb
+
+def people_1():
+    for i in range(1, 6):
+        yield {"ID": i, "Name": f"Person_{i}", "Age": 25 + i, "City": "City_A"}
+
+pipeline = dlt.pipeline(pipeline_name="people_pipeline",destination="duckdb",dataset_name="people")
+
+# for person in people_1():
+#     print(person)
+#     if person : 
+#       print("person added...")
+
+res = list(people_1())
+info = pipeline.run(res,table_name="people_info",write_disposition="replace")
+print(info)
+conn = duckdb.connect(f"{pipeline.pipeline_name}.duckdb")
+conn.sql(f"SET search_path = '{pipeline.dataset_name}'")
+display(conn.sql("show tables"))
+
+# display(people)
+
+
+def people_2():
+    for i in range(3, 9):
+        yield {"ID": i, "Name": f"Person_{i}", "Age": 30 + i, "City": "City_B", "Occupation": f"Job_{i}"}
+
+res2 = list(people_2())
+info = pipeline.run(res2,table_name="people_info",primary_key="id",write_disposition="merge")
+
+people = conn.sql("SELECT * FROM people_info").df()
+display(people)
+
+
+people_sum_age = conn.sql("SELECT SUM(age) FROM people_info").df()
+
+display(people_sum_age)
+
+# for person in people_2():
+#     print(person)

@@ -1,0 +1,75 @@
+dlt : data load tool 
+
+" A wild dataset magically appears!"
+
+We the people is where a wild dataset appears 
+
+Be the Magician !
+
+Schema -> Defines the dataset 
+
+As an engineer, you will need to build pipelines that “just work”.
+
+Extracting Data :
+
+Incremental Extraction ( Optional )
+
+Most data's are stored behind API's
+	: Web api, Rest api
+
+To prevent the pipelines from breaking :
+	- Hardware limits 
+	  - Disk spaces, RAM limits
+	- Network limits 
+	  - Nothing can be done, only retries
+	- Source api limits
+	  - No of request per api
+
+: Hardware Limits 
+	- Not running out of RAM 
+	  : Streaming of data is one of the solution
+	    => By chunks 
+	    => Eg., Youtube 
+
+	- What do DE do 
+	  : Stream the data b/w buffers 
+	    
+Steaming data using generators in py
+	: Generators => Its a function that can return multiple times 
+	  - yeild 
+
+Extraction
+
+API's => low thoroughput 
+	- The API's will be hitting everytime we request a data
+
+Data Download -> High Memory 
+	- If the data is 4GB then we need 8 GB to process 
+
+Through Streaming -> Best 
+	- By the use of generators ( yeild of data )
+
+installing dlt 
+
+dlt -> loading libary which is much faster 
+
+duckdb -> In memory Database, Where we can use in the flow. It doesn't have presistence database
+
+
+HW :
+1) C 8.38
+2) B 3.60
+3) A 353
+4) B 266
+
+
+
+
+
+
+
+
+
+ 
+
+ 
