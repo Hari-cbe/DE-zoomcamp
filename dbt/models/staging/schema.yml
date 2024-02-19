@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging 
+    database: datatalks-de-409612
+    schema: ny_taxi
+
+    tables:
+      - name: green_taxi_data
