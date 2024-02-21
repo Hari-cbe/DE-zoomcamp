@@ -9,7 +9,7 @@ with trips_data as (
     {{ dbt.date_trunc("month", "lpep_pickup_datetime") }} as revenue_month,
  
     service_type,
-
+    
     -- Revenue calculation
     sum(fare_amount) as revenue_monthly_fare,
     sum(extra) as revenue_monthly_extra,
