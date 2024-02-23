@@ -8,8 +8,8 @@ source as (
 
     select
         dispatching_base_num,
-        pickup_datetime,
-        dropoff_datetime,
+        cast(pickup_datetime as datetime) as pickup_datetime,
+        cast(dropoff_datetime as datetime) as dropoff_datetime,
         pulocationid,
         dolocationid,
         sr_flag,
